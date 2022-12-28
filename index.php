@@ -1,3 +1,27 @@
+<?php
+	@ob_start();
+	@session_start();
+	include("include/config.php");
+
+	if(!empty($_POST['kullanici'])&&!empty($_POST['sifre'])){
+		$kullanici = $_POST['kullanici'];
+		$sifre = md5($_POST['sifre']);
+		$sql = "SELECT sifre FROM user WHERE kullanici = '$kullanici'";
+		$result = $conn->query($sql);
+		if (mysqli_num_rows($result) > 0) {
+			$row = $result->fetch_array(MYSQLI_NUM);
+			if(!strcmp($sifre, $row[0])){ 
+				$bilgi = "Giriş başarılı..";
+			}else{
+				$bilgi = "Şifre yanlış!";
+			}
+		}else{
+			$bilgi = "Kullanıcı sistemde kayıtlı değil!";
+		}
+	}else{
+		$bilgi = "Lütfen boş alan bırakmayınız!";
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
@@ -27,7 +51,7 @@
 			<img src="https://www.4m1a.com/wp-content/uploads/2020/03/4m1aLogo.png" alt="4M1A Yazılım" class="center" /> 
 	   
 			<form id="loginform" class="form-vertical no-padding no-margin" action="#" method="post">
-				<p class="center">Kullanıcı Adınızı ve şifrenizi yazınız.</p>
+				<p class="center">Kullanıcı adınızı ve şifrenizi yazınız.</p>
 				<div class="control-group">
 					<div class="controls">
 						<div class="input-prepend">
@@ -54,7 +78,11 @@
 		</div>
 	 
 		<div id="login-copyright">
-			Otopark Sistemi <br><a href="4m1a.com">4M1A Yazılım</a>
+		  <?php
+			if(isset($bilgi))
+				echo  $bilgi;
+			?>
+			<br> Otopark Sistemi <br><a href="4m1a.com">4M1A Yazılım</a>
 		</div>
 	  
 		<script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
