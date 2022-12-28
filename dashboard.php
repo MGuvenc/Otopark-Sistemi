@@ -2,9 +2,9 @@
 	@ob_start();
 	@session_start();
 	include("include/config.php");
-	include("include/functions.php");
-	oturumkontrol();
-	header('Cache-Control: no-cache, no-store, must-revalidate');
+	if(empty($_SESSION["kullanici"])){
+		header("Refresh: 0; url= index.php");
+	}else{
 ?>
 
 <!DOCTYPE html>
@@ -85,3 +85,4 @@
 		</script>
 	</body>
 </html>
+<?php } ?>
