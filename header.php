@@ -2,7 +2,7 @@
 	<div class="navbar-inner">
 		<div class="container-fluid">
 			<a title="Anasayfa" class="brand" href="dashboard.php">Anasayfa</a>         
-				 	
+
 			<div class="top-nav">
 				<ul class="nav pull-right" id="top_menu">
 					<li class="divider-vertical hidden-phone hidden-tablet"></li>

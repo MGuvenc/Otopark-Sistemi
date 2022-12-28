@@ -32,7 +32,7 @@
 	</head>
 	<body class="fixed-top">
 		<?php include("header.php") ;?>
-	
+		<div id="container" class="row-fluid"><?php include("menu.php") ;?></div>
 	
 	
 	
