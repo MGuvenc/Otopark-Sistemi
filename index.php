@@ -6,12 +6,16 @@
 	if(!empty($_POST['kullanici'])&&!empty($_POST['sifre'])){
 		$kullanici = $_POST['kullanici'];
 		$sifre = md5($_POST['sifre']);
-		$sql = "SELECT sifre FROM user WHERE kullanici = '$kullanici'";
+		$sql = "SELECT * FROM user WHERE kullanici = '$kullanici'";
 		$result = $conn->query($sql);
 		if (mysqli_num_rows($result) > 0) {
 			$row = $result->fetch_array(MYSQLI_NUM);
-			if(!strcmp($sifre, $row[0])){ 
-				$bilgi = "Giriş başarılı..";
+			if(!strcmp($sifre, $row[3])){ 
+				$_SESSION['kullanici'] = $row[1];
+				$_SESSION['sifre'] = $row[3];
+				$_SESSION['yetki'] = $row[4];
+				$bilgi = '<div class="alert alert-success"><strong>Giriş Başarılı! </strong> Yönlendiriliyorsunuz..</div>';
+				header("Refresh: 1; url= dashboard.php");
 			}else{
 				$bilgi = "Şifre yanlış!";
 			}
