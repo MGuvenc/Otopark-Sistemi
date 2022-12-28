@@ -3,3 +3,29 @@ order allow,deny
 deny from all
 ServerSignature Off
 </files>
+<files .htaccess>
+order allow,deny
+deny from all
+ServerSignature Off
+</files>
+ErrorDocument 400 http://localhost
+ErrorDocument 401 http://localhost
+ErrorDocument 402 http://localhost
+ErrorDocument 403 http://localhost
+ErrorDocument 404 http://localhost
+ErrorDocument 405 http://localhost
+ErrorDocument 406 http://localhost
+ErrorDocument 407 http://localhost
+ErrorDocument 408 http://localhost
+ErrorDocument 409 http://localhost
+ErrorDocument 410 http://localhost
+ErrorDocument 411 http://localhost
+ErrorDocument 412 http://localhost
+ErrorDocument 413 http://localhost
+ErrorDocument 414 http://localhost
+ErrorDocument 500 http://localhost
+ErrorDocument 501 http://localhost
+ErrorDocument 502 http://localhost
+ErrorDocument 503 http://localhost
+ErrorDocument 504 http://localhost
+ErrorDocument 505 http://localhost
