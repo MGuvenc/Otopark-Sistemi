@@ -31,7 +31,7 @@
 		<link href="assets/plugins/jqvmap/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
 	</head>
 	<body class="fixed-top">
-	
+		<?php include("header.php") ;?>
 	
 	
 	
