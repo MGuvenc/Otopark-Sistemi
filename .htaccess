@@ -8,6 +8,16 @@ order allow,deny
 deny from all
 ServerSignature Off
 </files>
+<files menu.php>
+order allow,deny
+deny from all
+ServerSignature Off
+</files>
+<files header.php>
+order allow,deny
+deny from all
+ServerSignature Off
+</files>
 ErrorDocument 400 http://localhost
 ErrorDocument 401 http://localhost
 ErrorDocument 402 http://localhost
