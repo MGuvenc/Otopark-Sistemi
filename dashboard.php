@@ -91,6 +91,11 @@
 									<div>Araç Listele</div>
 									<span class="badge badge-warning">1</span>
 								</a>
+								<a href="arac_cikis.php" class="icon-btn span3">
+									<i class="icon-bookmark-empty"></i>
+									<div>Araç Çıkışı</div>
+									<span class="badge badge-warning">1</span>
+								</a>
 							</div>
 							
 							<div class="row-fluid">
