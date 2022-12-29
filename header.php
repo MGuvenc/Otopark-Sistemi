@@ -1,7 +1,7 @@
 <div id="header" class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-			<a title="Anasayfa" class="brand" href="dashboard.php">Anasayfa</a>         
+			<a title="Anasayfa" class="brand" href="dashboard.php">Ana Sayfa</a>         
 
 			<div class="top-nav">
 				<ul class="nav pull-right" id="top_menu">
@@ -27,7 +27,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="#"><i class="icon-user"></i> <?=$_SESSION['kullanici']?></a></li>
 							<li class="divider"></li>
-							<li><a href="#"><i class="icon-signout"></i> Oturumu Kapat</a></li>
+							<li><a href="include/cikis.php"><i class="icon-signout"></i> Oturumu Kapat</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -4,7 +4,7 @@
 		<li class="start active ">
 			<a href="dashboard.php">
 				<i class="icon-home"></i> 
-				<span class="title">Anasayfa</span>
+				<span class="title">Ana Sayfa</span>
 			</a>
 		</li>
 
@@ -50,7 +50,7 @@
 			</a>
 			<ul class="sub">
 				<li ><a href="#">Araç Ekle</a></li>
-                <li ><a href="#">Araç Görüntüle</a></li>
+                <li ><a href="arac.php">Araç Görüntüle</a></li>
 			</ul>
 		</li>
 				

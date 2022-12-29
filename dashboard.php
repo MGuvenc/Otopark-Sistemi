@@ -86,7 +86,7 @@
 									<i class="icon-bookmark-empty"></i>
 									<div>Araç Ekle</div>
 								</a>
-								<a href="#" class="icon-btn span3">
+								<a href="arac.php" class="icon-btn span3">
 									<i class="icon-bookmark-empty"></i>
 									<div>Araç Listele</div>
 									<span class="badge badge-warning">1</span>
