@@ -2,11 +2,16 @@
 	@ob_start();
 	@session_start();
 	include("include/config.php");
+	date_default_timezone_set('Asia/Istanbul');
 	if(empty($_SESSION["kullanici"])){
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
-
+<?php
+	$sql = "SELECT * FROM arac";
+	$result = $conn->query($sql);
+		if (mysqli_num_rows($result)>0){
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -60,26 +65,54 @@
 											<tr>
 												<th>Plaka</th>
 												<th>Giriş</th>
+												<th>Çıkış</th>
 												<th>Fiyat</th>
 												<th>Eleman</th>
 												<th>Durumu</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="odd gradeX">
-												<td>01MG011</td>
-												<td>01.01.2023</td>
-												<td>30</td>
-												<td>mguvenc</td>
-												<td><font color="green">Çıkış Yaptı</font></td>
-											</tr>
-											<tr class="odd gradeX">
-												<td>01MG011</td>
-												<td>01.01.2023</td>
-												<td>30</td>
-												<td>mguvenc</td>
-												<td><font color="red">Çıkış Yapmadı</font></td>
-											</tr>
+											<?php
+												while ($row = $result->fetch_array(MYSQLI_NUM)) {
+													$giris = $row[2];
+													$giris = date("Y-m-d H:i:s", $giris);
+													echo '<tr class="odd gradeX"><td>'.$row[1].'</td>
+													<td>'.$giris.'</td>';
+													if(!strcmp("0", $row[3])){
+														echo '<td>-</td>';
+													}else{
+														$cikis = $row[3];
+														$cikis = date("Y-m-d H:i:s", $cikis);
+														echo '<td>'.$cikis.'</td>';
+													}
+													if(strcmp("0", $row[3])){
+														$sql3 = "SELECT fiyat FROM guncel_fiyat";
+														$result3 = $conn->query($sql3);
+														if (mysqli_num_rows($result3)>0){
+															$scout = $row[3] - $row[2];
+															$scout = intval($scout/60/60);
+															$row3 = $result3->fetch_array(MYSQLI_NUM);
+															$total = $row3[0] * $scout;
+															echo '<td>'.$total.'</td>';
+														}
+													}else{
+														echo '<td>-</td>';
+													}
+													$sql2 = "SELECT kullanici FROM user WHERE id = '$row[5]'";
+													$result2 = $conn->query($sql2);
+													if (mysqli_num_rows($result2)>0){
+														$row2 = $result2->fetch_array(MYSQLI_NUM);
+														$row[5] = $row2[0];
+														echo '<td>'.$row[5].'</td>';
+													}
+													if(strcmp("0", $row[3])){
+														echo '<td><font color="green">Çıkış Yaptı</font></td></tr>';
+													}else{
+														echo '<td><font color="red">Çıkış Yapmadı</font></td></tr>';
+													}
+												}
+											}
+											?>
 										</tbody>
 									</table>
 								</div>
