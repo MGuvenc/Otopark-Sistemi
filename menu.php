@@ -11,7 +11,7 @@
 		<li class="has-sub ">
 			<a href="javascript:;">
 				<i class="icon-group"></i> 
-				<span class="title">Eleman Listesi</span>
+				<span class="title">Eleman Yönetimi</span>
                 <span class="arrow "></span>
 			</a>
             <ul class="sub">
@@ -45,12 +45,12 @@
         <li class="has-sub ">
 			<a href="javascript:;">
 				<i class="icon-bookmark-empty"></i> 
-				<span class="title">Galeri Yönetimi</span>
+				<span class="title">Araç Yönetimi</span>
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub">
 				<li ><a href="#">Araç Ekle</a></li>
-                <li ><a href="#">Araç Listele</a></li>
+                <li ><a href="#">Araç Görüntüle</a></li>
 			</ul>
 		</li>
 				
@@ -73,8 +73,8 @@
                 <span class="arrow "></span>
 			</a>
             <ul class="sub">
-                <li ><a href="#">Yönetici Ekleme</a></li> 
-                <li ><a href="#">Yönetici Listesi</a></li>                       
+                <li ><a href="#">Yönetici Ekle</a></li> 
+                <li ><a href="#">Yönetici Görüntüle</a></li>                       
 			</ul>
         </li>
 				

@@ -34,8 +34,119 @@
 		<?php include("header.php") ;?>
 		<div id="container" class="row-fluid"><?php include("menu.php") ;?></div>
 	
-	
-	
+		<div id="body">
+			<div class="container-fluid">
+			
+				<div class="row-fluid">
+					<div class="span12">
+						<h3 class="page-title">
+							<?php echo $_SESSION['kullanici']; ?> <small>Hoşgeldin | <?php echo $_SESSION['yetki']; ?></small>
+						</h3>
+					</div>
+				</div>
+				
+				<div id="page" class="dashboard">
+                    <div class="widget" style="width:40%; float:left;">
+					 
+                        <div class="widget-title">
+							<h4><i class="icon-reorder"></i> Kısayollar</h4>
+							<span class="tools">
+								<a href="javascript:;" class="icon-chevron-down"></a>
+							</span>
+                        </div>
+						
+                        <div class="widget-body">
+							<div class="row-fluid">
+								<a href="#" class="icon-btn span3">
+									<i class="icon-group"></i>
+									<div>Eleman Ekle</div>
+								</a>
+								<a href="#" class="icon-btn span3">
+									<i class="icon-group"></i>
+									<div>Eleman Görüntüle</div>
+									<span class="badge badge-info">1</span>
+								</a>
+							</div>
+							
+							<div class="row-fluid">
+								<a href="#" class="icon-btn span3">
+									<i class="icon-edit"></i>
+									<div>Rapor Görüntüle</div>
+									<span class="badge badge-warning">1</span>
+								</a>
+								<a href="#" class="icon-btn span3">
+									<i class="icon-tags"></i>
+									<div>Fiyat Listesi</div>
+									<span class="badge badge-warning">1</span>
+								</a>
+							</div>
+							
+							<div class="row-fluid">
+								<a href="#" class="icon-btn span3">
+									<i class="icon-bookmark-empty"></i>
+									<div>Araç Ekle</div>
+								</a>
+								<a href="#" class="icon-btn span3">
+									<i class="icon-bookmark-empty"></i>
+									<div>Araç Listele</div>
+									<span class="badge badge-warning">1</span>
+								</a>
+							</div>
+							
+							<div class="row-fluid">
+								<a href="#" class="icon-btn span3">
+									<i class="icon-cloud"></i>
+									<div>Kasa Düzenle</div>
+								</a>
+								<a href="#" class="icon-btn span3">
+									<i class="icon-cloud"></i>
+									<div>Kasa Görüntüle</div>
+									<span class="badge badge-success">1000</span>
+								</a> 
+							</div>
+							
+							<div class="row-fluid">
+								<a href="#" class="icon-btn span3">
+									<i class="icon-user"></i>
+									<div>Yönetici Ekle</div>
+								</a>
+								<a href="#" class="icon-btn span3">
+									<i class="icon-user"></i>
+									<div>Yönetici Görüntüle</div>
+									<span class="badge badge-info">1</span>
+								</a>
+							</div>
+							
+                        </div>
+                    </div>
+                </div>
+                
+				<div class="widget" style="width:50%; margin-left:20px; float:left;">
+                    <div class="widget-title">
+                        <h4><i class="icon-bar-chart"></i> Son Araç Girişleri</h4>
+                        <span class="tools"><a style="color:#016FA7;margin-right:20px;"href="#"> Tümü</a>
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body" >
+                        <table class="table table-hover"> 
+                            <tr>
+								<th><strong>Araç Adı</strong></th>
+                                <th><strong>Fiyat</strong></th>
+								<th><strong>Giriş</strong></th>
+                            </tr>
+                            <tr>
+								<td><a href="#">sdf</a></td>
+								<td>sdf</td>
+								<td>dsf</td>
+							</tr>
+                        </table>
+					</div>
+                </div>
+				
+			</div>
+		</div>
+
 		<script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>	
 		<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->	
 		<script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>		
