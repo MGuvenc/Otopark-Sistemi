@@ -2,15 +2,27 @@
 	@ob_start();
 	@session_start();
 	include("include/config.php");
+	date_default_timezone_set('Asia/Istanbul');
 	if(empty($_SESSION["kullanici"])){
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
 
+<?php
+	$mesaj = "";
+	if(!empty($_GET["id"])){
+		$sqll = "UPDATE arac SET cikis=".time()." WHERE id=".$_GET['id']."";
+		if ($conn->query($sqll) === TRUE) {
+			$mesaj = 'Çıkış işlemi başarılı!
+			<meta http-equiv="refresh" content="3; URL=http://localhost/arac_cikis.php">';
+		} else {
+		}
+	}
+?>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
+<!--[if !IE]><!--><html lang="tr"><!--<![endif]-->
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>4M1A | Otopark Sistemi</title>
@@ -54,12 +66,13 @@
 								</div>
 								<div class="widget-body">
 									<div class="clearfix margin-bottom-10"></div>
-									Bilgi
+									<?php echo $mesaj; ?>
 									<table class="table table-striped table-bordered table-hover" id="sample_1" style="font-size:12px;">
 										<thead>
 											<tr>
 												<th>Plaka</th>
 												<th>Giriş</th>
+												<th>Çıkış</th>
 												<th>Fiyat</th>
 												<th>Eleman</th>
 												<th>Durumu</th>
@@ -68,16 +81,34 @@
 										</thead>
 										<tbody>
 											<?php
+											$sql = "SELECT * FROM arac WHERE cikis='0' and eleman_id=".$_SESSION['id']."";
+											$result = $conn->query($sql);
+											if (mysqli_num_rows($result)>0){
 												while ($row = $result->fetch_array(MYSQLI_NUM)) {
+													$giris = $row[2];
+													$giris = date("Y-m-d H:i:s", $giris);
 													echo '<tr class="odd gradeX"><td>'.$row[1].'</td>
-													<td>'.$row[2].'</td>';
+													<td>'.$giris.'</td>';
 													if(!strcmp("0", $row[3])){
-														$row[3] = "-";
-														echo '<td>'.$row[3].'</td>';
+														echo '<td>-</td>';
 													}else{
-														echo '<td>'.$row[3].'</td>';
+														$cikis = $row[3];
+														$cikis = date("Y-m-d H:i:s", $cikis);
+														echo '<td>'.$cikis.'</td>';
 													}
-													echo '<td>'.$row[4].'</td>';
+													if(strcmp("0", $row[3])){
+														$sql3 = "SELECT fiyat FROM guncel_fiyat";
+														$result3 = $conn->query($sql3);
+														if (mysqli_num_rows($result3)>0){
+															$scout = $row[3] - $row[2];
+															$scout = intval($scout/60/60);
+															$row3 = $result3->fetch_array(MYSQLI_NUM);
+															$total = $row3[0] * $scout;
+															echo '<td>'.$total.'</td>';
+														}
+													}else{
+														echo '<td>-</td>';
+													}
 													$sql2 = "SELECT kullanici FROM user WHERE id = '$row[5]'";
 													$result2 = $conn->query($sql2);
 													if (mysqli_num_rows($result2)>0){
@@ -85,20 +116,16 @@
 														$row[5] = $row2[0];
 														echo '<td>'.$row[5].'</td>';
 													}
-													if(strcmp("-", $row[3])){
-														echo '<td><font color="green">Çıkış Yaptı</font></td>';
-													}else{
-														echo '<td><font color="red">Çıkış Yapmadı</font></td>';
-													}
+													
+														echo'<td><font color="red">Çıkış Yapmadı</font></td>
+														<td><a href="arac_cikis.php?id='.$row[0].'" class="btn btn-danger">Sil</a></td></tr>';
+											
 												}
 											}
+											else{
+												echo'<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
+											}
 											?>
-												<td>
-													<a href="" title="Sil" onclick="return confirm('Çıkış yapmak istediğinize emin misiniz?')">
-														<i class="icon-remove sercan_sil_icon"></i>
-													</a>
-												</td>
-											</tr>
 										</tbody>
 									</table>
 								</div>

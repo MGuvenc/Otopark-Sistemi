@@ -7,11 +7,6 @@
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
-<?php
-	$sql = "SELECT * FROM arac";
-	$result = $conn->query($sql);
-		if (mysqli_num_rows($result)>0){
-?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -73,6 +68,9 @@
 										</thead>
 										<tbody>
 											<?php
+											$sql = "SELECT * FROM arac WHERE eleman_id=".$_SESSION['id']."";
+											$result = $conn->query($sql);
+											if (mysqli_num_rows($result)>0){
 												while ($row = $result->fetch_array(MYSQLI_NUM)) {
 													$giris = $row[2];
 													$giris = date("Y-m-d H:i:s", $giris);
@@ -111,6 +109,8 @@
 														echo '<td><font color="red">Çıkış Yapmadı</font></td></tr>';
 													}
 												}
+											}else{
+												echo'<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
 											}
 											?>
 										</tbody>
