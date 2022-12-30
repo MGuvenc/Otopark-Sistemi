@@ -67,12 +67,32 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="odd gradeX">
-												<td>01MG011</td>
-												<td>01.01.2023</td>
-												<td>30</td>
-												<td>mguvenc</td>
-												<td><font color="red">Çıkış Yapmadı</font></td>
+											<?php
+												while ($row = $result->fetch_array(MYSQLI_NUM)) {
+													echo '<tr class="odd gradeX"><td>'.$row[1].'</td>
+													<td>'.$row[2].'</td>';
+													if(!strcmp("0", $row[3])){
+														$row[3] = "-";
+														echo '<td>'.$row[3].'</td>';
+													}else{
+														echo '<td>'.$row[3].'</td>';
+													}
+													echo '<td>'.$row[4].'</td>';
+													$sql2 = "SELECT kullanici FROM user WHERE id = '$row[5]'";
+													$result2 = $conn->query($sql2);
+													if (mysqli_num_rows($result2)>0){
+														$row2 = $result2->fetch_array(MYSQLI_NUM);
+														$row[5] = $row2[0];
+														echo '<td>'.$row[5].'</td>';
+													}
+													if(strcmp("-", $row[3])){
+														echo '<td><font color="green">Çıkış Yaptı</font></td>';
+													}else{
+														echo '<td><font color="red">Çıkış Yapmadı</font></td>';
+													}
+												}
+											}
+											?>
 												<td>
 													<a href="" title="Sil" onclick="return confirm('Çıkış yapmak istediğinize emin misiniz?')">
 														<i class="icon-remove sercan_sil_icon"></i>
