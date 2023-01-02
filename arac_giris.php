@@ -7,6 +7,20 @@
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
+<?php
+	$mesaj = "";
+	$plaka = $_POST["plaka"];
+	if(!empty($plaka)){
+		$sql = "INSERT INTO arac (plaka, giris, cikis, fiyat, eleman_id)
+		VALUES ('".$plaka."', '".time()."', '0', '0', '".$_SESSION['id']."')";
+
+		if ($conn->query($sql) === TRUE) {
+			$mesaj = "Araç Girişi Başarılı!";
+		} else {
+			$mesaj = "Hata: " . $sql . "<br>" . $conn->error;
+		}
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
@@ -51,8 +65,8 @@
 							<h4><i class="icon-bookmark-empty"></i> Araç Girişi</h4>
 						</div>
 						<div class="widget-body form">
-							bilgi
-							<form action="#" id="form_sample_1" class="form-horizontal" method="post" enctype="multipart/form-data">
+							<?php echo $mesaj; ?>
+							<form action="" id="form_sample_1" class="form-horizontal" method="post" enctype="multipart/form-data">
 								<div class="control-group">
 									<label class="control-label">Plaka</label>
 									<div class="controls">
