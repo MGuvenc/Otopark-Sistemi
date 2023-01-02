@@ -9,10 +9,10 @@
 ?>
 <?php
 	$mesaj = "";
-	$plaka = $_POST["plaka"];
-	if(!empty($plaka)){
+	
+	if(!empty($_POST["plaka"])){
 		$sql = "INSERT INTO arac (plaka, giris, cikis, fiyat, eleman_id)
-		VALUES ('".$plaka."', '".time()."', '0', '0', '".$_SESSION['id']."')";
+		VALUES ('".$_POST['plaka']."', '".time()."', '0', '0', '".$_SESSION['id']."')";
 
 		if ($conn->query($sql) === TRUE) {
 			$mesaj = "Araç Girişi Başarılı!";
