@@ -49,7 +49,7 @@
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub">
-				<li ><a href="#">Araç Ekle</a></li>
+				<li ><a href="arac_giris.php">Araç Ekle</a></li>
                 <li ><a href="arac.php">Araç Görüntüle</a></li>
                 <li ><a href="arac_cikis.php">Araç Çıkışı</a></li>
 			</ul>

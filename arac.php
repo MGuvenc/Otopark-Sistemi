@@ -8,9 +8,9 @@
 	}else{
 ?>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="tr"> <!--<![endif]-->
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>4M1A | Otopark Sistemi</title>
