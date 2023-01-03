@@ -127,9 +127,6 @@
 														<button type="submit" class="btn btn-danger" name="id" value="'.$row[0].'">Çıkış Yap</button></form></td></tr>';											
 												}
 											}
-											else{
-												echo'<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
-											}
 											?>
 											
 										</tbody>
