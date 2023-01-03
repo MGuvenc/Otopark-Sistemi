@@ -7,7 +7,27 @@
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
-
+<?php
+	$mesaj = "";
+	
+	if(!empty($_POST["kAdi"]) and !empty($_POST["mail"]) and !empty($_POST["sifre"])){
+		$selectUser = "SELECT kullanici FROM user WHERE kullanici = '".$_POST['kAdi']."'";
+		$rUser = $conn->query($selectUser);
+		if(mysqli_num_rows($rUser)>0){
+			$mesaj = '<div class="alert">Kullanıcı Adı Sistemde Kayıtlı! Lütfen Farklı Bir Kullanıcı Adı Giriniz..</div>';
+		}else{
+			$insertUser = "INSERT INTO user (kullanici, mail, sifre, yetki)
+			VALUES ('".$_POST['kAdi']."','".$_POST['mail']."','".md5($_POST['sifre'])."', 'Eleman')";
+			if ($conn->query($insertUser) === TRUE) {
+				$mesaj = '<div class="alert alert-success">Eleman Ekleme Başarılı!</div>';
+			} else {
+				$mesaj = '<div class="alert">Hata: '.$insertUser.'<br>'.$conn->error.'</div>';
+			}
+		}
+	}else{
+		$mesaj = '<div class="alert">Lütfen boş alan bırakmayın..</div>';
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
@@ -52,6 +72,7 @@
 							<h4><i class="icon-group"></i> Eleman Ekle</h4>
 						</div>
 						<div class="widget-body form">
+							<?php echo $mesaj; ?>
 							<form action="" id="form_sample_1" class="form-horizontal" method="post" enctype="multipart/form-data">
 								<div class="control-group">
 									<label class="control-label">Kullanıcı Adı</label>
