@@ -15,8 +15,9 @@
                 <span class="arrow "></span>
 			</a>
             <ul class="sub">
-				<li ><a href="#">Eleman Ekle</a></li>
-				<li ><a href="#">Eleman Görüntüle</a></li>
+				<li ><a href="eleman_ekle.php">Eleman Ekle</a></li>
+				<li ><a href="eleman.php">Eleman Görüntüle</a></li>
+				<li ><a href="eleman_cikar.php">Eleman Çıkar</a></li>
 			</ul>
 		</li>
 				
