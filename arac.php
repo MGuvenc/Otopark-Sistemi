@@ -109,8 +109,6 @@
 														echo '<td><font color="red">Çıkış Yapmadı</font></td></tr>';
 													}
 												}
-											}else{
-												echo'<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
 											}
 											?>
 										</tbody>
