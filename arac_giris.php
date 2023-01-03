@@ -12,12 +12,12 @@
 	
 	if(!empty($_POST["plaka"])){
 		$sql = "INSERT INTO arac (plaka, giris, cikis, eleman_id)
-		VALUES ('".$_POST['plaka']."', '".time()."', '0', '".$_SESSION['id']."')";
+		VALUES ('".strtoupper($_POST['plaka'])."', '".time()."', '0', '".$_SESSION['id']."')";
 
 		if ($conn->query($sql) === TRUE) {
-			$mesaj = "Araç Girişi Başarılı!";
+			$mesaj = '<div class="alert alert-success">Araç Girişi Başarılı!</div>';
 		} else {
-			$mesaj = "Hata: " . $sql . "<br>" . $conn->error;
+			$mesaj = '<div class="alert">Hata: '.$sql.'<br>'.$conn->error.'</div>';
 		}
 	}
 ?>
