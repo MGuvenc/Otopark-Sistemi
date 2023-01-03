@@ -10,12 +10,28 @@
 
 <?php
 	$mesaj = "";
-	if(!empty($_GET["id"])){
-		$sqll = "UPDATE arac SET cikis=".time()." WHERE id=".$_GET['id']."";
-		if ($conn->query($sqll) === TRUE) {
-			$mesaj = 'Çıkış işlemi başarılı!
-			<meta http-equiv="refresh" content="3; URL=http://localhost/arac_cikis.php">';
-		} else {
+	if(!empty($_POST["id"])){
+		$updateArac = "UPDATE arac SET cikis=".time()." WHERE id=".$_POST['id']."";
+		$selectArac = "SELECT giris FROM arac WHERE id=".$_POST['id']."";
+		$selectFiyat = "SELECT fiyat FROM guncel_fiyat";
+		$qFiyat = $conn->query($selectFiyat);
+		$qArac = $conn->query($selectArac);
+		if ($conn->query($updateArac) === TRUE) {
+			$mesaj = 'Çıkış işlemi başarılı!';
+			if ($rowArac = $qArac->fetch_array(MYSQLI_NUM)){
+				if (mysqli_num_rows($qFiyat)>0){
+					$scout = time() - $rowArac[0];
+					$scout = intval($scout/60/60);
+					$cFiyat = $qFiyat->fetch_array(MYSQLI_NUM);
+					$total = $cFiyat[0] * $scout;
+					$insertKasa = "INSERT INTO kasa (tarih, miktar, eleman_id) VALUES ('".time()."', '".$total."', '".$_SESSION['id']."')";
+					if($conn->query($insertKasa)){
+						$mesaj = '<div class="alert alert-success">'.$mesaj.' '.$total.'TL kasaya eklendi..</div>';
+					}
+				}
+			}
+		}else {
+			$mesaj = '<div class="alert">Çıkış işlemi başarısız!</div>';
 		}
 	}
 ?>
@@ -72,7 +88,7 @@
 											<tr>
 												<th>Plaka</th>
 												<th>Giriş</th>
-												<th>Çıkış</th>
+												<th>Geçen Süre</th>
 												<th>Fiyat</th>
 												<th>Eleman</th>
 												<th>Durumu</th>
@@ -80,6 +96,7 @@
 											</tr>
 										</thead>
 										<tbody>
+										
 											<?php
 											$sql = "SELECT * FROM arac WHERE cikis='0' and eleman_id=".$_SESSION['id']."";
 											$result = $conn->query($sql);
@@ -89,43 +106,32 @@
 													$giris = date("Y-m-d H:i:s", $giris);
 													echo '<tr class="odd gradeX"><td>'.$row[1].'</td>
 													<td>'.$giris.'</td>';
-													if(!strcmp("0", $row[3])){
-														echo '<td>-</td>';
-													}else{
-														$cikis = $row[3];
-														$cikis = date("Y-m-d H:i:s", $cikis);
-														echo '<td>'.$cikis.'</td>';
+													$sql3 = "SELECT fiyat FROM guncel_fiyat";
+													$result3 = $conn->query($sql3);
+													if (mysqli_num_rows($result3)>0){
+														$scout = time() - $row[2];
+														$scout = intval($scout/60/60);
+														$row3 = $result3->fetch_array(MYSQLI_NUM);
+														$total = $row3[0] * $scout;
+														echo '<td>'.$scout.' saat</td><td>'.$total.'</td>';
 													}
-													if(strcmp("0", $row[3])){
-														$sql3 = "SELECT fiyat FROM guncel_fiyat";
-														$result3 = $conn->query($sql3);
-														if (mysqli_num_rows($result3)>0){
-															$scout = $row[3] - $row[2];
-															$scout = intval($scout/60/60);
-															$row3 = $result3->fetch_array(MYSQLI_NUM);
-															$total = $row3[0] * $scout;
-															echo '<td>'.$total.'</td>';
-														}
-													}else{
-														echo '<td>-</td>';
-													}
-													$sql2 = "SELECT kullanici FROM user WHERE id = '$row[5]'";
+													$sql2 = "SELECT kullanici FROM user WHERE id = '$row[4]'";
 													$result2 = $conn->query($sql2);
 													if (mysqli_num_rows($result2)>0){
 														$row2 = $result2->fetch_array(MYSQLI_NUM);
-														$row[5] = $row2[0];
-														echo '<td>'.$row[5].'</td>';
+														$row[4] = $row2[0];
+														echo '<td>'.$row[4].'</td>';
 													}
-													
-														echo'<td><font color="red">Çıkış Yapmadı</font></td>
-														<td><a href="arac_cikis.php?id='.$row[0].'" class="btn btn-danger">Sil</a></td></tr>';
-											
+													echo'<td><font color="red">Çıkış Yapmadı</font></td>
+														<td><form method="post" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+														<button type="submit" class="btn btn-danger" name="id" value="'.$row[0].'">Çıkış Yap</button></form></td></tr>';											
 												}
 											}
 											else{
 												echo'<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
 											}
 											?>
+											
 										</tbody>
 									</table>
 								</div>

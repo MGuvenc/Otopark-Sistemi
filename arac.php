@@ -96,12 +96,12 @@
 													}else{
 														echo '<td>-</td>';
 													}
-													$sql2 = "SELECT kullanici FROM user WHERE id = '$row[5]'";
+													$sql2 = "SELECT kullanici FROM user WHERE id = '$row[4]'";
 													$result2 = $conn->query($sql2);
 													if (mysqli_num_rows($result2)>0){
 														$row2 = $result2->fetch_array(MYSQLI_NUM);
-														$row[5] = $row2[0];
-														echo '<td>'.$row[5].'</td>';
+														$row[4] = $row2[0];
+														echo '<td>'.$row[4].'</td>';
 													}
 													if(strcmp("0", $row[3])){
 														echo '<td><font color="green">Çıkış Yaptı</font></td></tr>';
