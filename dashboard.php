@@ -57,14 +57,18 @@
 						
                         <div class="widget-body">
 							<div class="row-fluid">
-								<a href="#" class="icon-btn span3">
+								<a href="eleman_ekle.php" class="icon-btn span3">
 									<i class="icon-group"></i>
 									<div>Eleman Ekle</div>
 								</a>
-								<a href="#" class="icon-btn span3">
+								<a href="eleman.php" class="icon-btn span3">
 									<i class="icon-group"></i>
 									<div>Eleman Görüntüle</div>
 									<span class="badge badge-info">1</span>
+								</a>
+								<a href="eleman_cikar.php" class="icon-btn span3">
+									<i class="icon-group"></i>
+									<div>Eleman Çıkar</div>
 								</a>
 							</div>
 							
