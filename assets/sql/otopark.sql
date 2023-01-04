@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 04 Oca 2023, 15:17:50
+-- Üretim Zamanı: 04 Oca 2023, 15:41:54
 -- Sunucu sürümü: 10.4.27-MariaDB
 -- PHP Sürümü: 8.1.12
 
@@ -74,6 +74,15 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
+-- Tablo döküm verisi `user`
+--
+
+INSERT INTO `user` (`id`, `kullanici`, `mail`, `sifre`, `yetki`) VALUES
+(1, 'user1', 'info@4m1a.com', '0192023a7bbd73250516f069df18b500', 'Admin'),
+(2, 'user2', 'user2@mail.com', '0192023a7bbd73250516f069df18b500', 'Patron'),
+(3, 'user2', 'user2@gmail.com', '0192023a7bbd73250516f069df18b500', 'Eleman');
+
+--
 -- Dökümü yapılmış tablolar için indeksler
 --
 
@@ -127,7 +136,7 @@ ALTER TABLE `kasa`
 -- Tablo için AUTO_INCREMENT değeri `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
