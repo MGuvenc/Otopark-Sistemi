@@ -162,7 +162,10 @@
 				<div class="widget" style="width:50%; margin-left:20px; float:left;">
                     <div class="widget-title">
                         <h4><i class="icon-bar-chart"></i> Otoparkta Bulunan Araçlar</h4>
-                        <span class="tools"><a style="color:#016FA7;margin-right:20px;"href="arac_cikis.php">Tümü</a>
+                        <span class="tools">
+						<?php if(!strcmp("Eleman", $_SESSION['yetki'])){ 
+							echo '<a style="color:#016FA7;margin-right:20px;" href="arac_cikis.php">Tümü</a>'; }
+						?>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         </span>
                     </div>
