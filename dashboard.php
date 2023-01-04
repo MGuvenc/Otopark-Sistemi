@@ -103,7 +103,7 @@
 							</div>
 							
 							<div class="row-fluid">
-								<a href="#" class="icon-btn span3">
+								<a href="kasa.php" class="icon-btn span3">
 									<i class="icon-cloud"></i>
 									<div>Kasa Görüntüle</div>
 									<span class="badge badge-success">1000</span>
