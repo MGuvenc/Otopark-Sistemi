@@ -41,7 +41,7 @@
                 <span class="arrow "></span>
 			</a>
             <ul class="sub">
-				<li ><a href="#">Rapor Görüntüle</a></li>
+				<li ><a href="rapor.php">Rapor Görüntüle</a></li>
             </ul>
         </li>
 		
