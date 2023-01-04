@@ -156,7 +156,9 @@
                         </div>
                     </div>
                 </div>
-                
+                <?php
+					if(!strcmp("Eleman", $_SESSION['yetki']) or !strcmp("Patron", $_SESSION['yetki'])){
+				?>
 				<div class="widget" style="width:50%; margin-left:20px; float:left;">
                     <div class="widget-title">
                         <h4><i class="icon-bar-chart"></i> Otoparkta Bulunan Araçlar</h4>
@@ -228,7 +230,7 @@
                         </table>
 					</div>
                 </div>
-				
+				<?php } ?>
 			</div>
 		</div>
 
