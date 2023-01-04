@@ -5,7 +5,7 @@
 	date_default_timezone_set('Asia/Istanbul');
 	if(empty($_SESSION["kullanici"])){
 		header("Refresh: 0; url= index.php");
-	}else{
+	}else if(!strcmp("Eleman", $_SESSION['yetki']) or !strcmp("Patron", $_SESSION['yetki'])){
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
@@ -54,7 +54,6 @@
 								</div>
 								<div class="widget-body">
 									<div class="clearfix margin-bottom-10"></div>
-									Bilgi
 									<table class="table table-striped table-bordered table-hover" id="sample_1" style="font-size:12px;">
 										<thead>
 											<tr>
@@ -144,4 +143,8 @@
 		</script>
 	</body>
 </html>
-<?php } ?>
+<?php 
+	}else{
+		header("Refresh: 0; url= dashboard.php");
+	}
+?>
