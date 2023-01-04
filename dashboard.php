@@ -111,11 +111,11 @@
 							</div>
 							
 							<div class="row-fluid">
-								<a href="#" class="icon-btn span3">
+								<a href="yonetici_ekle.php" class="icon-btn span3">
 									<i class="icon-user"></i>
 									<div>Yönetici Ekle</div>
 								</a>
-								<a href="#" class="icon-btn span3">
+								<a href="yonetici.php" class="icon-btn span3">
 									<i class="icon-user"></i>
 									<div>Yönetici Görüntüle</div>
 									<span class="badge badge-info">1</span>
