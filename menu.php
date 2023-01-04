@@ -74,8 +74,8 @@
                 <span class="arrow "></span>
 			</a>
             <ul class="sub">
-                <li ><a href="#">Yönetici Ekle</a></li> 
-                <li ><a href="#">Yönetici Görüntüle</a></li>                       
+                <li ><a href="yonetici_ekle.php">Yönetici Ekle</a></li> 
+                <li ><a href="yonetici.php">Yönetici Görüntüle</a></li>                       
 			</ul>
         </li>
 				
