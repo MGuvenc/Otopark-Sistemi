@@ -64,7 +64,17 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+											<?php
+											$selectUser = "SELECT * FROM user WHERE yetki='Patron'";
+											$rUser = $conn->query($selectUser);
+											if (mysqli_num_rows($rUser)>0){
+												while ($row = $rUser->fetch_array(MYSQLI_NUM)) {
+													echo '<tr class="odd gradeX"><td>'.$row[1].'</td>
+														<td>'.$row[2].'</td>
+														<td>'.$row[4].'</td>';
+												}
+											}
+											?>
 										</tbody>
 									</table>
 								</div>
