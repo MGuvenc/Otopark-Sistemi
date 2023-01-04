@@ -20,6 +20,19 @@
 				<li ><a href="eleman_cikar.php">Eleman Çıkar</a></li>
 			</ul>
 		</li>
+		
+        <li class="has-sub ">
+			<a href="javascript:;">
+				<i class="icon-bookmark-empty"></i> 
+				<span class="title">Araç Yönetimi</span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub">
+				<li ><a href="arac_giris.php">Araç Ekle</a></li>
+                <li ><a href="arac.php">Araç Görüntüle</a></li>
+                <li ><a href="arac_cikis.php">Araç Çıkışı</a></li>
+			</ul>
+		</li>
 				
 		<li class="has-sub ">
 			<a href="javascript:;">
@@ -39,20 +52,7 @@
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub">
-                <li ><a href="#">Fiyat Listesi</a></li>
-			</ul>
-		</li>
-		
-        <li class="has-sub ">
-			<a href="javascript:;">
-				<i class="icon-bookmark-empty"></i> 
-				<span class="title">Araç Yönetimi</span>
-				<span class="arrow "></span>
-			</a>
-			<ul class="sub">
-				<li ><a href="arac_giris.php">Araç Ekle</a></li>
-                <li ><a href="arac.php">Araç Görüntüle</a></li>
-                <li ><a href="arac_cikis.php">Araç Çıkışı</a></li>
+                <li ><a href="fiyat.php">Fiyat Listesi</a></li>
 			</ul>
 		</li>
 				
