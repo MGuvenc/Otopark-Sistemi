@@ -50,7 +50,7 @@
 						<div class="span12">
 							<div class="widget box light-grey">
 								<div class="widget-title">
-									<h4><i class="icon-bookmark-empty"></i> Araç Girişleri</h4>
+									<h4><i class="icon-bookmark-empty"></i> Eleman Listesi</h4>
 								</div>
 								<div class="widget-body">
 									<div class="clearfix margin-bottom-10"></div>
