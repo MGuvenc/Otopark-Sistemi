@@ -63,7 +63,7 @@
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub">
-				<li ><a href="#">Kasa Görüntüle</a></li>
+				<li ><a href="kasa.php">Kasa Görüntüle</a></li>
 			</ul>
 		</li>
 
