@@ -51,7 +51,7 @@
 							<h4><i class="icon-group"></i> Yönetici Ekle</h4>
 						</div>
 						<div class="widget-body form">
-							<?php echo $mesaj; ?>
+							Mesaj
 							<form action="" id="form_sample_1" class="form-horizontal" method="post" enctype="multipart/form-data">
 								<div class="control-group">
 									<label class="control-label">Kullanıcı Adı</label>
