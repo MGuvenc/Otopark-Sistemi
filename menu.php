@@ -7,7 +7,10 @@
 				<span class="title">Ana Sayfa</span>
 			</a>
 		</li>
-
+	<?php
+		if(!strcmp("Patron", $_SESSION['yetki'])){
+	?>
+	
 		<li class="has-sub ">
 			<a href="javascript:;">
 				<i class="icon-group"></i> 
@@ -21,19 +24,6 @@
 			</ul>
 		</li>
 		
-        <li class="has-sub ">
-			<a href="javascript:;">
-				<i class="icon-bookmark-empty"></i> 
-				<span class="title">Araç Yönetimi</span>
-				<span class="arrow "></span>
-			</a>
-			<ul class="sub">
-				<li ><a href="arac_giris.php">Araç Ekle</a></li>
-                <li ><a href="arac.php">Araç Görüntüle</a></li>
-                <li ><a href="arac_cikis.php">Araç Çıkışı</a></li>
-			</ul>
-		</li>
-				
 		<li class="has-sub ">
 			<a href="javascript:;">
 				<i class="icon-edit"></i> 
@@ -55,7 +45,7 @@
                 <li ><a href="fiyat.php">Fiyat Listesi</a></li>
 			</ul>
 		</li>
-				
+		
         <li class="has-sub ">
 			<a href="javascript:;">
 				<i class="icon-cloud"></i> 
@@ -66,7 +56,31 @@
 				<li ><a href="kasa.php">Kasa Görüntüle</a></li>
 			</ul>
 		</li>
-
+		
+	<?php } ?>
+	<?php
+		if(!strcmp("Eleman", $_SESSION['yetki'])){
+	?>
+	
+        <li class="has-sub ">
+			<a href="javascript:;">
+				<i class="icon-bookmark-empty"></i> 
+				<span class="title">Araç Yönetimi</span>
+				<span class="arrow "></span>
+			</a>
+			<ul class="sub">
+				<li ><a href="arac_giris.php">Araç Ekle</a></li>
+                <li ><a href="arac.php">Araç Görüntüle</a></li>
+                <li ><a href="arac_cikis.php">Araç Çıkışı</a></li>
+			</ul>
+		</li>
+		
+	<?php } ?>
+	
+	<?php
+		if(!strcmp("Admin", $_SESSION['yetki'])){
+	?>
+	
         <li class="has-sub ">
 			<a href="javascript:;">
 				<i class="icon-cogs"></i> 
@@ -78,7 +92,9 @@
                 <li ><a href="yonetici.php">Yönetici Görüntüle</a></li>                       
 			</ul>
         </li>
-				
+		
+	<?php } ?>
+	
 		<li class="">
 			<a href="include/cikis.php">
 				<i class="icon-signout"></i> 
