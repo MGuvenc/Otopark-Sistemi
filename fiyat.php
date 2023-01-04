@@ -7,6 +7,17 @@
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
+<?php
+	$mesaj = "";
+	if(!empty($_POST["deneme"])){
+		$updateFiyat = "UPDATE guncel_fiyat SET fiyat='".$_POST["deneme"]."'";
+		if ($conn->query($updateFiyat) === TRUE) {
+			$mesaj = '<div class="alert alert-success">Fiyat Güncellendi!</div>';
+		}else {
+			$mesaj = '<div class="alert">Çıkış işlemi başarısız!</div>';
+		}
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
@@ -50,19 +61,30 @@
 						<div class="span12">
 							<div class="widget box light-grey">
 								<div class="widget-title">
-									<h4><i class="icon-bookmark-empty"></i> Araç Girişleri</h4>
+									<h4><i class="icon-tags"></i> Fiyat Listesi</h4>
 								</div>
 								<div class="widget-body">
 									<div class="clearfix margin-bottom-10"></div>
-									Bilgi
-									<table class="table table-striped table-bordered table-hover" id="sample_1" style="font-size:12px;">
+									<?php echo $mesaj; ?>
+									<table class="table table-striped table-bordered table-hover" style="font-size:12px;">
 										<thead>
 											<tr>
 												<th>Saatlik Fiyat</th>
+												<th>İşlem</th>
 											</tr>
 										</thead>
 										<tbody>
-											<td>-</td>
+											<?php
+											$selectFiyat = "SELECT fiyat FROM guncel_fiyat";
+											$rFiyat = $conn->query($selectFiyat);
+											if (mysqli_num_rows($rFiyat)>0){
+												$rowFiyat = $rFiyat->fetch_array(MYSQLI_NUM);
+												echo '<td><form method="post" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
+													  <input type="text" name="deneme" value="'.$rowFiyat[0].'"><input type="text" class="input-mini" value="TL" disabled></td>
+													  <td><button class="btn btn-info">
+													  Düzenle</button></form></td>';
+											}
+											?>
 										</tbody>
 									</table>
 								</div>
