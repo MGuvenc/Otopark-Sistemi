@@ -18,6 +18,7 @@ order allow,deny
 deny from all
 ServerSignature Off
 </files>
+Options -indexes
 ErrorDocument 400 http://localhost
 ErrorDocument 401 http://localhost
 ErrorDocument 402 http://localhost
