@@ -90,7 +90,7 @@
 							</div>
 							
 							<div class="row-fluid">
-								<a href="#" class="icon-btn span3">
+								<a href="rapor.php" class="icon-btn span3">
 									<i class="icon-edit"></i>
 									<div>Rapor Görüntüle</div>
 									<span class="badge badge-warning">1</span>
