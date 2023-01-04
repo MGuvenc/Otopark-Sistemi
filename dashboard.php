@@ -80,6 +80,9 @@
                         </div>
 						
                         <div class="widget-body">
+							<?php
+								if(!strcmp("Patron", $_SESSION['yetki'])){
+							?>
 							<div class="row-fluid">
 								<a href="eleman_ekle.php" class="icon-btn span3">
 									<i class="icon-group"></i>
@@ -93,23 +96,6 @@
 								<a href="eleman_cikar.php" class="icon-btn span3">
 									<i class="icon-group"></i>
 									<div>Eleman Çıkar</div>
-								</a>
-							</div>
-							
-							<div class="row-fluid">
-								<a href="arac_giris.php" class="icon-btn span3">
-									<i class="icon-bookmark-empty"></i>
-									<div>Araç Ekle</div>
-								</a>
-								<a href="arac.php" class="icon-btn span3">
-									<i class="icon-bookmark-empty"></i>
-									<div>Araç Listele</div>
-									<span class="badge badge-info"><?php echo $arac[0];?></span>
-								</a>
-								<a href="arac_cikis.php" class="icon-btn span3">
-									<i class="icon-bookmark-empty"></i>
-									<div>Araç Çıkışı</div>
-									<span class="badge badge-warning"><?php echo $cikis[0];?></span>
 								</a>
 							</div>
 							
@@ -131,7 +117,30 @@
 									<span class="badge badge-success"><?php echo $kasa;?></span>
 								</a> 
 							</div>
-							
+							<?php } ?>
+							<?php
+								if(!strcmp("Eleman", $_SESSION['yetki'])){
+							?>
+							<div class="row-fluid">
+								<a href="arac_giris.php" class="icon-btn span3">
+									<i class="icon-bookmark-empty"></i>
+									<div>Araç Ekle</div>
+								</a>
+								<a href="arac.php" class="icon-btn span3">
+									<i class="icon-bookmark-empty"></i>
+									<div>Araç Listele</div>
+									<span class="badge badge-info"><?php echo $arac[0];?></span>
+								</a>
+								<a href="arac_cikis.php" class="icon-btn span3">
+									<i class="icon-bookmark-empty"></i>
+									<div>Araç Çıkışı</div>
+									<span class="badge badge-warning"><?php echo $cikis[0];?></span>
+								</a>
+							</div>
+							<?php } ?>
+							<?php
+								if(!strcmp("Admin", $_SESSION['yetki'])){
+							?>
 							<div class="row-fluid">
 								<a href="yonetici_ekle.php" class="icon-btn span3">
 									<i class="icon-user"></i>
@@ -143,7 +152,7 @@
 									<span class="badge badge-info"><?php echo $patron[0];?></span>
 								</a>
 							</div>
-							
+							<?php } ?>
                         </div>
                     </div>
                 </div>
