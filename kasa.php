@@ -7,6 +7,30 @@
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
+<?php
+	$selectKasa = "SELECT * FROM kasa";
+	$queryKasa = $conn -> query($selectKasa);
+	$selectUser = "SELECT * FROM user";
+	$queryUser = $conn -> query($selectUser);
+	$arrayID=array();
+	$arrayUser=array();
+	if (mysqli_num_rows($queryUser)>0){
+		while($rowUser = $queryUser->fetch_array(MYSQLI_NUM)){
+			array_push($arrayID,$rowUser[0]);
+		}
+	}
+	if (mysqli_num_rows($queryKasa)>0){
+		for($a = 0; $a < count($arrayID); $a++){
+			$i = 0;
+			while ($rowKasa = $queryKasa->fetch_array(MYSQLI_NUM)) {
+				if(!strcmp($rowKasa[3],$arrayID[$a])){
+					$i += $rowKasa[2];
+				}
+			}
+			array_push($arrayUser,$i);
+		}
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
@@ -54,7 +78,7 @@
 								</div>
 								<div class="widget-body">
 									<div class="clearfix margin-bottom-10"></div>
-									
+									<canvas id="canvas" width="600" height="500"></canvas>
 								</div>
 							</div>
 						</div>
@@ -84,6 +108,85 @@
 				TableManaged.init();
 			});
 		</script>
+		<script type="text/javascript">
+var myColor = ["#39ca74","#e54d42","#f0c330","#3999d8","#35485d"];
+var myData = [<?=$arrayUser[0];?>, <?=$arrayUser[1];?>];
+var myLabel = [<?=$arrayID[0];?>, <?=$arrayID[1];?>];
+ 
+function getTotal(){
+  var myTotal = 0;
+  for (var j = 0; j < myData.length; j++) {
+    myTotal += (typeof myData[j] == 'number') ? myData[j] : 0;
+  }
+  return myTotal;
+}
+ 
+function plotData() {
+  var canvas;
+  var ctx;
+  var lastend = 0;
+  var myTotal = getTotal();
+  var doc;
+  canvas = document.getElementById("canvas");
+  var x = (canvas.width)/2;
+  var y = (canvas.height)/2;
+  var r = 150;
+  
+  ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+ 
+  for (var i = 0; i < myData.length; i++) {
+    ctx.fillStyle = myColor[i];
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.arc(x,y,r,lastend,lastend+(Math.PI*2*(myData[i]/myTotal)),false);
+    ctx.lineTo(x,y);
+    ctx.fill();
+    
+    // Grafik üzerindeki ifadeler bu kısımdan sonra yaptırılacak.
+    ctx.beginPath();
+    var start = [];
+    var end = [];
+    var last = 0;
+    var flip = 0;
+    var textOffset = 0;
+    var precentage = (myData[i]/myTotal)*100;
+    start = getPoint(x,y,r-20,(lastend+(Math.PI*2*(myData[i]/myTotal))/2));
+    end = getPoint(x,y,r+20,(lastend+(Math.PI*2*(myData[i]/myTotal))/2));
+    if(start[0] <= x)
+    {
+      flip = -1;
+      textOffset = -110;
+    }
+    else
+    {
+      flip = 1;
+      textOffset = 10;
+    }
+    ctx.moveTo(start[0],start[1]);
+    ctx.lineTo(end[0],end[1]);
+    ctx.lineTo(end[0]+120*flip,end[1]);
+    ctx.strokeStyle = "#bdc3c7";
+    ctx.lineWidth   = 2;
+    ctx.stroke();
+   
+// Etiketler ayarlanıyor
+    ctx.font="17px Arial";
+    ctx.fillText(myLabel[i]+" "+precentage.toFixed(2)+"%",end[0]+textOffset,end[1]-4); 
+   
+// Döngü artırılıyor
+    lastend += Math.PI*2*(myData[i]/myTotal);
+    
+  }
+}
+// Sihirli nokta bulunuyor.
+function getPoint(c1,c2,radius,angle) {
+  return [c1+Math.cos(angle)*radius,c2+Math.sin(angle)*radius];
+}
+// Çizim fonksiyonu çalıştırılıyor.
+plotData();
+ 
+</script>
 	</body>
 </html>
 <?php } ?>
