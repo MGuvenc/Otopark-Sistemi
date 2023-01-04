@@ -64,7 +64,6 @@
 			</a>
 			<ul class="sub">
 				<li ><a href="#">Kasa Görüntüle</a></li>
-                <li ><a href="#">Kasa Düzenle</a></li>
 			</ul>
 		</li>
 
