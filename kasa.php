@@ -5,7 +5,7 @@
 	date_default_timezone_set('Asia/Istanbul');
 	if(empty($_SESSION["kullanici"])){
 		header("Refresh: 0; url= index.php");
-	}else{
+	}else if(!strcmp("Patron", $_SESSION['yetki'])){
 ?>
 <?php
 	$i = 0;
@@ -207,4 +207,8 @@
 		</script>
 	</body>
 </html>
-<?php } ?>
+<?php 
+	}else{
+		header("Refresh: 0; url= dashboard.php");
+	}
+?>
