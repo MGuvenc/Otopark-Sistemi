@@ -2,11 +2,35 @@
 	@ob_start();
 	@session_start();
 	include("include/config.php");
+	date_default_timezone_set('Asia/Istanbul');
 	if(empty($_SESSION["kullanici"])){
 		header("Refresh: 0; url= index.php");
 	}else{
 ?>
+<?php
+	$elemanSaySql = "SELECT COUNT(*) FROM user WHERE yetki='Eleman'";
+	$elemanSay = $conn->query($elemanSaySql);
+	$eleman = mysqli_fetch_array($elemanSay);
+	
+	$aracSaySql = "SELECT COUNT(*) FROM arac";
+	$aracSay = $conn->query($aracSaySql);
+	$arac = mysqli_fetch_array($aracSay);
+	
+	$cikisSaySql = "SELECT COUNT(*) FROM arac WHERE cikis='0'";
+	$cikisSay = $conn->query($cikisSaySql);
+	$cikis = mysqli_fetch_array($cikisSay);
+	
+	$kasaSaySql = "SELECT * FROM kasa ORDER BY id DESC";
+	$kasaSay = $conn->query($kasaSaySql);
+	$kasa=0;
+	while($rowKasa = mysqli_fetch_array($kasaSay)){
+		$kasa = $kasa + $rowKasa["miktar"];
+	}
 
+	$patronSaySql = "SELECT COUNT(*) FROM user WHERE yetki='Patron'";
+	$patronSay = $conn->query($patronSaySql);
+	$patron = mysqli_fetch_array($patronSay);
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="tr" class="ie9"> <![endif]-->
@@ -64,7 +88,7 @@
 								<a href="eleman.php" class="icon-btn span3">
 									<i class="icon-group"></i>
 									<div>Eleman Görüntüle</div>
-									<span class="badge badge-info">1</span>
+									<span class="badge badge-info"><?php echo $eleman[0];?></span>
 								</a>
 								<a href="eleman_cikar.php" class="icon-btn span3">
 									<i class="icon-group"></i>
@@ -80,12 +104,12 @@
 								<a href="arac.php" class="icon-btn span3">
 									<i class="icon-bookmark-empty"></i>
 									<div>Araç Listele</div>
-									<span class="badge badge-warning">1</span>
+									<span class="badge badge-info"><?php echo $arac[0];?></span>
 								</a>
 								<a href="arac_cikis.php" class="icon-btn span3">
 									<i class="icon-bookmark-empty"></i>
 									<div>Araç Çıkışı</div>
-									<span class="badge badge-warning">1</span>
+									<span class="badge badge-warning"><?php echo $cikis[0];?></span>
 								</a>
 							</div>
 							
@@ -93,12 +117,10 @@
 								<a href="rapor.php" class="icon-btn span3">
 									<i class="icon-edit"></i>
 									<div>Rapor Görüntüle</div>
-									<span class="badge badge-warning">1</span>
 								</a>
 								<a href="fiyat.php" class="icon-btn span3">
 									<i class="icon-tags"></i>
 									<div>Fiyat Listesi</div>
-									<span class="badge badge-warning">1</span>
 								</a>
 							</div>
 							
@@ -106,7 +128,7 @@
 								<a href="kasa.php" class="icon-btn span3">
 									<i class="icon-cloud"></i>
 									<div>Kasa Görüntüle</div>
-									<span class="badge badge-success">1000</span>
+									<span class="badge badge-success"><?php echo $kasa;?></span>
 								</a> 
 							</div>
 							
@@ -118,7 +140,7 @@
 								<a href="yonetici.php" class="icon-btn span3">
 									<i class="icon-user"></i>
 									<div>Yönetici Görüntüle</div>
-									<span class="badge badge-info">1</span>
+									<span class="badge badge-info"><?php echo $patron[0];?></span>
 								</a>
 							</div>
 							
@@ -128,23 +150,72 @@
                 
 				<div class="widget" style="width:50%; margin-left:20px; float:left;">
                     <div class="widget-title">
-                        <h4><i class="icon-bar-chart"></i> Son Araç Girişleri</h4>
-                        <span class="tools"><a style="color:#016FA7;margin-right:20px;"href="#"> Tümü</a>
+                        <h4><i class="icon-bar-chart"></i> Otoparkta Bulunan Araçlar</h4>
+                        <span class="tools"><a style="color:#016FA7;margin-right:20px;"href="arac_cikis.php">Tümü</a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         </span>
                     </div>
                     <div class="widget-body" >
                         <table class="table table-hover"> 
                             <tr>
-								<th><strong>Araç Adı</strong></th>
-                                <th><strong>Fiyat</strong></th>
-								<th><strong>Giriş</strong></th>
+								<th>Plaka</th>
+								<th>Giriş</th>
+								<th>Çıkış</th>
+								<th>Fiyat</th>
+								<th>Eleman</th>
+								<th>Durumu</th>
                             </tr>
-                            <tr>
-								<td><a href="#">sdf</a></td>
-								<td>sdf</td>
-								<td>dsf</td>
-							</tr>
+                            <?php
+								$sql = "SELECT * FROM arac WHERE cikis='0'";
+								$result = $conn->query($sql);
+								$i=0;
+								if (mysqli_num_rows($result)>0){
+									while ($row = $result->fetch_array(MYSQLI_NUM)and $i<5) {
+										$giris = $row[2];
+										$giris = date("Y-m-d H:i:s", $giris);
+										echo '<tr><td>'.$row[1].'</td>
+										
+											<td>'.$giris.'</td>';
+											
+										if(!strcmp("0", $row[3])){
+											echo '<td>-</td>';
+										}else{
+											$cikis = $row[3];
+											$cikis = date("Y-m-d H:i:s", $cikis);
+											echo '<td>'.$cikis.'</td>';
+										}
+										
+										if(strcmp("0", $row[3])){
+											$sql3 = "SELECT fiyat FROM guncel_fiyat";
+											$result3 = $conn->query($sql3);
+											if (mysqli_num_rows($result3)>0){
+												$scout = $row[3] - $row[2];
+												$scout = intval($scout/60/60);
+												$row3 = $result3->fetch_array(MYSQLI_NUM);
+												$total = $row3[0] * $scout;
+												echo '<td>'.$total.'</td>';
+											}
+										}else{
+											echo '<td>-</td>';
+										}
+										
+										$sql2 = "SELECT kullanici FROM user WHERE id = '$row[4]'";
+										$result2 = $conn->query($sql2);
+										if (mysqli_num_rows($result2)>0){
+											$row2 = $result2->fetch_array(MYSQLI_NUM);
+											$row[4] = $row2[0];
+												echo '<td>'.$row[4].'</td>';
+										}
+										
+										if(strcmp("0", $row[3])){
+											echo '<td><font color="green">Çıkış Yaptı</font></td></tr>';
+										}else{
+											echo '<td><font color="red">Çıkış Yapmadı</font></td></tr>';
+										}
+										$i++;
+									}
+								}
+							?>
                         </table>
 					</div>
                 </div>
