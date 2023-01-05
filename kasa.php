@@ -12,9 +12,9 @@
 	$mesaj ="";
 	$selectUser = "SELECT * FROM user WHERE yetki='Eleman'";
 	$queryUser = $conn -> query($selectUser);
-	$arrayID=array();//1 2
-	$arrayUser=array();//1350 0
-	$arrayKadi = array();//mg mg2
+	$arrayID=array();
+	$arrayUser=array();
+	$arrayKadi = array();
 	if (mysqli_num_rows($queryUser)>0){
 		while($rowUser = $queryUser->fetch_array(MYSQLI_NUM)){
 			array_push($arrayID,$rowUser[0]);
@@ -31,12 +31,13 @@
 				}
 				array_push($arrayUser,$i);
 				$i = 0;
+			}else{
+				array_push($arrayUser,0);
 			}
 		}
 	}else{
 		array_push($arrayID,'1');
 		array_push($arrayKadi,'Default');
-		array_push($arrayUser,100);
 		$mesaj = '<div class="alert">Sistemde tanımlı eleman bulunmadığından default olarak tasarlanmıştır. <strong>Gerçek veri değildir!</strong></div>';
 	}
 	
