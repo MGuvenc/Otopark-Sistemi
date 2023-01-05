@@ -11,7 +11,7 @@
 	$mesaj = "";
 	
 	if(!empty($_POST["plaka"])){
-		$selectPlaka = "SELECT kullanici FROM user WHERE plaka = '".$_POST['plaka']."' and cikis = 0";
+		$selectPlaka = "SELECT * FROM arac WHERE plaka = '".$_POST['plaka']."' and cikis = 0";
 		$rPlaka = $conn->query($selectPlaka);
 		if(mysqli_num_rows($rPlaka)>0){
 				$mesaj = '<div class="alert">Araç zaten otoparkta bulunuyor.. Lütfen farklı bir plaka girişi yapın!</div>';
