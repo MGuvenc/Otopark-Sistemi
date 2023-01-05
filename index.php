@@ -11,7 +11,7 @@
 		if (mysqli_num_rows($result) > 0) {
 			$row = $result->fetch_array(MYSQLI_NUM);
 			if(!strcmp($sifre, $row[3])){ 
-				if(!strcmp('0', $row[4]){
+				if(!strcmp('0', $row[4])){
 					$bilgi = '<div class="alert"><strong>Giriş Başarısız! </strong> Lütfen Patronunuza Başvurunuz..</div>';
 					header("Refresh: 1; url= index.php");
 				}else{
