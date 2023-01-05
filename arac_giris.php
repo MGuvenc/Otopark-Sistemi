@@ -11,13 +11,19 @@
 	$mesaj = "";
 	
 	if(!empty($_POST["plaka"])){
-		$sql = "INSERT INTO arac (plaka, giris, cikis, eleman_id)
-		VALUES ('".strtoupper($_POST['plaka'])."', '".time()."', '0', '".$_SESSION['id']."')";
+		$selectPlaka = "SELECT kullanici FROM user WHERE plaka = '".$_POST['plaka']."' and cikis = 0";
+		$rPlaka = $conn->query($selectPlaka);
+		if(mysqli_num_rows($rPlaka)>0){
+				$mesaj = '<div class="alert">Araç zaten otoparkta bulunuyor.. Lütfen farklı bir plaka girişi yapın!</div>';
+		}else{
+			$sql = "INSERT INTO arac (plaka, giris, cikis, eleman_id)
+			VALUES ('".strtoupper($_POST['plaka'])."', '".time()."', '0', '".$_SESSION['id']."')";
 
-		if ($conn->query($sql) === TRUE) {
-			$mesaj = '<div class="alert alert-success">Araç Girişi Başarılı!</div>';
-		} else {
-			$mesaj = '<div class="alert">Hata: '.$sql.'<br>'.$conn->error.'</div>';
+			if ($conn->query($sql) === TRUE) {
+				$mesaj = '<div class="alert alert-success">Araç Girişi Başarılı!</div>';
+			} else {
+				$mesaj = '<div class="alert">Hata: '.$sql.'<br>'.$conn->error.'</div>';
+			}
 		}
 	}
 ?>
