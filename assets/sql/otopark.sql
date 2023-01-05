@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 04 Oca 2023, 15:41:54
+-- Üretim Zamanı: 05 Oca 2023, 13:06:52
 -- Sunucu sürümü: 10.4.27-MariaDB
 -- PHP Sürümü: 8.1.12
 
@@ -46,6 +46,13 @@ CREATE TABLE `guncel_fiyat` (
   `fiyat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
+--
+-- Tablo döküm verisi `guncel_fiyat`
+--
+
+INSERT INTO `guncel_fiyat` (`id`, `fiyat`) VALUES
+(1, 50);
+
 -- --------------------------------------------------------
 
 --
@@ -79,8 +86,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `kullanici`, `mail`, `sifre`, `yetki`) VALUES
 (1, 'user1', 'user1@4m1a.com', '0192023a7bbd73250516f069df18b500', 'Admin'),
-(2, 'user2', 'user2@4m1a.com', '0192023a7bbd73250516f069df18b500', 'Patron'),
-(3, 'user3', 'user3@4m1a.com', '0192023a7bbd73250516f069df18b500', 'Eleman');
+(2, 'user2', 'user2@mail.com', '0192023a7bbd73250516f069df18b500', 'Patron'),
+(3, 'user3', 'user3@gmail.com', '0192023a7bbd73250516f069df18b500', 'Eleman');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -124,7 +131,7 @@ ALTER TABLE `arac`
 -- Tablo için AUTO_INCREMENT değeri `guncel_fiyat`
 --
 ALTER TABLE `guncel_fiyat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kasa`
