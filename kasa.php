@@ -9,7 +9,8 @@
 ?>
 <?php
 	$i = 0;
-	$selectUser = "SELECT * FROM user";
+	$mesaj ="";
+	$selectUser = "SELECT * FROM user WHERE yetki='Eleman'";
 	$queryUser = $conn -> query($selectUser);
 	$arrayID=array();//1 2
 	$arrayUser=array();//1350 0
@@ -19,21 +20,26 @@
 			array_push($arrayID,$rowUser[0]);
 			array_push($arrayKadi,$rowUser[1]);
 		}
-	}
-	$mesaj ="";
-	for($a = 0; $a < count($arrayID); $a++){
-		$selectKasa = "SELECT * FROM kasa";
-		$queryKasa = $conn -> query($selectKasa);
-		if (mysqli_num_rows($queryKasa)>0){
-			while ($rowKasa = $queryKasa->fetch_array(MYSQLI_NUM)) {
-				if(!strcmp($rowKasa[3],$arrayID[$a])){
-					$i += $rowKasa[2];
+		for($a = 0; $a < count($arrayID); $a++){
+			$selectKasa = "SELECT * FROM kasa";
+			$queryKasa = $conn -> query($selectKasa);
+			if (mysqli_num_rows($queryKasa)>0){
+				while ($rowKasa = $queryKasa->fetch_array(MYSQLI_NUM)) {
+					if(!strcmp($rowKasa[3],$arrayID[$a])){
+						$i += $rowKasa[2];
+					}
 				}
+				array_push($arrayUser,$i);
+				$i = 0;
 			}
-			array_push($arrayUser,$i);
-			$i = 0;
 		}
+	}else{
+		array_push($arrayID,'1');
+		array_push($arrayKadi,'Default');
+		array_push($arrayUser,100);
+		$mesaj = '<div class="alert">Sistemde tanımlı eleman bulunmadığından default olarak tasarlanmıştır. <strong>Gerçek veri değildir!</strong></div>';
 	}
+	
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
@@ -96,6 +102,7 @@
 											?>
 										</tbody>
 									</table>
+									<?php echo $mesaj;?>
 									<canvas id="canvas" width="600" height="500"></canvas>
 									
 								</div>
