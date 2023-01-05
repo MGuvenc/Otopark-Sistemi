@@ -13,8 +13,12 @@
 	if(!empty($_POST["kAdi"]) and !empty($_POST["mail"]) and !empty($_POST["sifre"])){
 		$selectUser = "SELECT kullanici FROM user WHERE kullanici = '".$_POST['kAdi']."'";
 		$rUser = $conn->query($selectUser);
+		$selectMail = "SELECT kullanici FROM user WHERE mail = '".$_POST['mail']."'";
+		$rMail = $conn->query($selectMail);
 		if(mysqli_num_rows($rUser)>0){
 			$mesaj = '<div class="alert">Kullanıcı Adı Sistemde Kayıtlı! Lütfen Farklı Bir Kullanıcı Adı Giriniz..</div>';
+		}else if(mysqli_num_rows($rMail)>0){
+			$mesaj = '<div class="alert">Mail Sistemde Kayıtlı! Lütfen Farklı Bir Mail Giriniz..</div>';
 		}else{
 			$insertUser = "INSERT INTO user (kullanici, mail, sifre, yetki)
 			VALUES ('".$_POST['kAdi']."','".$_POST['mail']."','".md5($_POST['sifre'])."', 'Patron')";
