@@ -66,7 +66,7 @@
 										</thead>
 										<tbody>
 											<?php
-											$selectUser = "SELECT * FROM user";
+											$selectUser = "SELECT * FROM user WHERE yetki='Eleman'";
 											$rUser = $conn->query($selectUser);
 											if (mysqli_num_rows($rUser)>0){
 												while ($row = $rUser->fetch_array(MYSQLI_NUM)) {
@@ -87,9 +87,6 @@
 														}
 													}
 												}
-											}
-											else{
-												echo'<tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>';
 											}
 											?>
 										</tbody>
