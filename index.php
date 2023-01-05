@@ -11,13 +11,17 @@
 		if (mysqli_num_rows($result) > 0) {
 			$row = $result->fetch_array(MYSQLI_NUM);
 			if(!strcmp($sifre, $row[3])){ 
-			
-				$_SESSION['id'] = $row[0];
-				$_SESSION['kullanici'] = $row[1];
-				$_SESSION['sifre'] = $row[3];
-				$_SESSION['yetki'] = $row[4];
-				$bilgi = '<div class="alert alert-success"><strong>Giriş Başarılı! </strong> Yönlendiriliyorsunuz..</div>';
-				header("Refresh: 1; url= dashboard.php");
+				if(!strcmp('0', $row[4]){
+					$bilgi = '<div class="alert"><strong>Giriş Başarısız! </strong> Lütfen Patronunuza Başvurunuz..</div>';
+					header("Refresh: 1; url= index.php");
+				}else{
+					$_SESSION['id'] = $row[0];
+					$_SESSION['kullanici'] = $row[1];
+					$_SESSION['sifre'] = $row[3];
+					$_SESSION['yetki'] = $row[4];
+					$bilgi = '<div class="alert alert-success"><strong>Giriş Başarılı! </strong> Yönlendiriliyorsunuz..</div>';
+					header("Refresh: 1; url= dashboard.php");
+				}
 			}else{
 				$bilgi = "Şifre yanlış!";
 			}
