@@ -86,8 +86,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `kullanici`, `mail`, `sifre`, `yetki`) VALUES
 (1, 'user1', 'user1@4m1a.com', '0192023a7bbd73250516f069df18b500', 'Admin'),
-(2, 'user2', 'user2@mail.com', '0192023a7bbd73250516f069df18b500', 'Patron'),
-(3, 'user3', 'user3@gmail.com', '0192023a7bbd73250516f069df18b500', 'Eleman');
+(2, 'user2', 'user2@4m1a.com', '0192023a7bbd73250516f069df18b500', 'Patron'),
+(3, 'user3', 'user3@4m1a.com', '0192023a7bbd73250516f069df18b500', 'Eleman');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
