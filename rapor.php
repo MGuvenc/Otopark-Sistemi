@@ -9,31 +9,39 @@
 ?>
 <?php
 	$i = 0;
-	$selectUser = "SELECT * FROM user";
+	$mesaj ="";
+	$selectUser = "SELECT * FROM user WHERE yetki='Eleman'";
 	$queryUser = $conn -> query($selectUser);
-	$arrayID=array();//1 2
-	$arrayUser=array();//1350 0
-	$arrayKadi = array();//mg mg2
+	$arrayID=array();
+	$arrayUser=array();
+	$arrayKadi = array();
 	if (mysqli_num_rows($queryUser)>0){
 		while($rowUser = $queryUser->fetch_array(MYSQLI_NUM)){
 			array_push($arrayID,$rowUser[0]);
 			array_push($arrayKadi,$rowUser[1]);
 		}
-	}
-	$mesaj ="";
-	for($a = 0; $a < count($arrayID); $a++){
-		$selectKasa = "SELECT * FROM kasa";
-		$queryKasa = $conn -> query($selectKasa);
-		if (mysqli_num_rows($queryKasa)>0){
-			while ($rowKasa = $queryKasa->fetch_array(MYSQLI_NUM)) {
-				if(!strcmp($rowKasa[3],$arrayID[$a])){
-					$i += $rowKasa[2];
+		
+		for($a = 0; $a < count($arrayID); $a++){
+			$selectKasa = "SELECT * FROM kasa";
+			$queryKasa = $conn -> query($selectKasa);
+			if (mysqli_num_rows($queryKasa)>0){
+				while ($rowKasa = $queryKasa->fetch_array(MYSQLI_NUM)) {
+					if(!strcmp($rowKasa[3],$arrayID[$a])){
+						$i += $rowKasa[2];
+					}
 				}
+				array_push($arrayUser,$i);
+				$i = 0;
 			}
-			array_push($arrayUser,$i);
-			$i = 0;
 		}
+	}else{
+		array_push($arrayID, 1);
+		array_push($arrayUser, 100);
+		array_push($arrayKadi, 'Default');
+		$mesaj = '<div class="alert">Sistemde tanımlı eleman bulunmadığından default olarak tasarlanmıştır. <strong>Gerçek veri değildir!</strong></div>';
 	}
+	
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="tr" class="ie8"> <![endif]-->
@@ -82,6 +90,7 @@
 								</div>
 								<div class="widget-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<?php echo $mesaj;?>
 									<canvas id="ilk"></canvas>
 								</div>
 							</div>
@@ -115,16 +124,16 @@
 		</script>
 		<script>
 			var miktar = [];
-			var markalar = [];
+			var kullanici = [];
 			<?php for($a = 0; $a < count($arrayID); $a++){ ?>
-			markalar.push("<?=$arrayKadi[$a];?>");
+			kullanici.push("<?=$arrayKadi[$a];?>");
 			miktar.push(<?=$arrayUser[$a];?>);
 			<?php } ?>
 			var kanvas = document.getElementById('ilk');
 			var grafik = new Chart(kanvas, {
 			type: 'bar',
 				data: {
-					labels: markalar,
+					labels: kullanici,
 					datasets: [{
 						label: 'Günlük Eleman Cirosu',
 						data: miktar,
